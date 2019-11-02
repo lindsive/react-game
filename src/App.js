@@ -55,6 +55,10 @@ class App extends Component {
         });
     };
 
+    handleClick = (id) => {
+        console.log("clicked" + id);
+    };
+    
     render() {
         return (
             <Wrapper className="wrapper">
@@ -70,7 +74,8 @@ class App extends Component {
                         key={planetobj.id}
                         name={planetobj.name}
                         image={planetobj.image}
-                    />
+                        onClick={() => this.handleClick(planetobj.id)}
+                        />
 
                 ))}
             </Wrapper>

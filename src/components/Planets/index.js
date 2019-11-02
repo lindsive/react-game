@@ -5,7 +5,8 @@ function Planets(props) {
     return (
       
         <div className="container">
-            <img id={props.name} alt={props.name} src={props.image} />
+            <img id={props.id} alt={props.name} src={props.image} />
+
         </div>
         
     );
