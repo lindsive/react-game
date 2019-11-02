@@ -7,9 +7,18 @@ import data from "./planets.json";
 class App extends Component {
     state = {
         data,
-        clicked: false,
         score: 0,
-        topScore: 0
+        topScore: 0,
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+        6: false,
+        7: false,
+        8: false,
+        9: false
+
     };
 
     // setState of data to shuffle on load
@@ -29,7 +38,7 @@ class App extends Component {
     };
 
     // when player guesses correctly
-    handleCorrectGuess = (clickedData) => {
+    handleCorrectGuess = (id) => {
         // current state of topScore and score
         let topScore = this.state;
         let score = this.state;
@@ -40,9 +49,10 @@ class App extends Component {
 
         // set new state of data
         this.setState({
-            data: this.shuffle(clickedData),
+            data: this.shuffle(data),
             score: clickScore,
-            topScore: clickTopScore
+            topScore: clickTopScore,
+            [id]: true
         });
     }
 
@@ -56,7 +66,18 @@ class App extends Component {
     };
 
     handleClick = (id) => {
-        console.log("clicked" + id);
+        console.log("clicked" + id)
+
+        if (this.state.id === true) {
+            this.handleIncorrectGuess()
+        } else {
+            this.handleCorrectGuess()
+        }
+
+        this.setState({
+
+           [id]: true  
+        }) 
     };
     
     render() {
@@ -64,7 +85,6 @@ class App extends Component {
             <Wrapper className="wrapper">
                 <Title>
                     Memory Game
-                    <br />
                     Score:{this.state.score} Top Score:{this.state.totalScore}
                 </Title>
                 {this.state.data.map(planetobj => (
@@ -74,7 +94,7 @@ class App extends Component {
                         key={planetobj.id}
                         name={planetobj.name}
                         image={planetobj.image}
-                        onClick={() => this.handleClick(planetobj.id)}
+                        onClick={this.handleClick}
                         />
 
                 ))}
